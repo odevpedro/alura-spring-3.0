@@ -1,6 +1,5 @@
 package med.voll.api.doctor.record;
 
-import lombok.AllArgsConstructor;
 import med.voll.api.adress.DadosEndereco;
 import med.voll.api.doctor.Especialidade;
 
