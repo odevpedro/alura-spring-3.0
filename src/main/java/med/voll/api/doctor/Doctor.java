@@ -13,6 +13,7 @@ import med.voll.api.doctor.record.DoctorsRegister;
 @Entity(name = "Medico")
 @Getter
 @AllArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode(of = "id")
 public class Doctor {
 
@@ -21,6 +22,7 @@ public class Doctor {
     private Long id;
     private String nome;
     private String email;
+    private String telefone;
     private String crm;
 
     @Enumerated(EnumType.STRING)
@@ -33,6 +35,7 @@ public class Doctor {
         this.email = dados.email();
         this.crm = dados.crm();
         this.especialidade = dados.especialidade();
+        this.telefone = dados.telefone();
         this.endereco = new Endereco(dados.endereco());
     }
 
