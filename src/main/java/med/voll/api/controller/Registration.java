@@ -14,7 +14,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -34,7 +33,7 @@ public class Registration {
     //por padrão são carregados 20 registros do db sem ordenação
     @GetMapping
     public Page<DadosListagemMedico> list(@PageableDefault(size = 10, page = 0, sort = {"nome"}) Pageable pageable) {
-        return repository.findAll(pageable).map(DadosListagemMedico::new);
+        return repository.findAllByAtivoTrue(pageable).map(DadosListagemMedico::new);
     }
 
     @PutMapping
@@ -42,5 +41,12 @@ public class Registration {
     public void atualizar(@RequestBody @Valid DadosAtualizacaoMedico dados) {
         var doctor = repository.getReferenceById(dados.id());
         doctor.atualizaatualizarInformacoes(dados);
+    }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public void excluir(@PathVariable Long id) {
+        var medico = repository.getReferenceById(id);
+        medico.excluir();
     }
 }
